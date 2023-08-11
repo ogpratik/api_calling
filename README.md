@@ -4,13 +4,16 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+# Flutter SDK version
+sdk: ">=2.12.0 <3.0.0"
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+# Dependency packages and versions
+dependencies:
+  flutter: "2.2.3"
+  cupertino_icons: "^1.0.3"
+  http: "^0.13.3"
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+dev_dependencies:
+  flutter_test: "5.0.0"
+  flutter_lints: "2.0.0"

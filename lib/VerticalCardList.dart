@@ -1,5 +1,6 @@
 import 'package:api_calling/Services/apicall.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'CustomCard.dart';
 
 class VerticalCardList extends StatefulWidget {
@@ -8,41 +9,39 @@ class VerticalCardList extends StatefulWidget {
 }
 
 class _VerticalCardListState extends State<VerticalCardList> {
-  late List<Doctor> futureDoctors;
+  // late List<Doctor> futureDoctors;
+  late ApiServices apiServices;
 
   @override
   void initState() {
     super.initState();
-    _loadDoctors();
+    // _loadDoctors();
   }
 
-  _loadDoctors() async {
-    futureDoctors = await ApiServices().fetchDoctors();
-    setState(() {});
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    apiServices = Provider.of<ApiServices>(context, listen: false);
+    apiServices.fetchDoctors();
   }
+
+  // _loadDoctors() async {
+  //   futureDoctors = await ApiServices().fetchDoctors();
+  //   setState(() {});
+  // }
 
 //create doctor provider class and dont use future
   @override
   Widget build(BuildContext context) {
-    // List<Doctor> doctors = [
-    //   Doctor(title: 'Dr. John Doe', description: 'Cardiologist'),
-    //   Doctor(title: 'Dr. Jane Smith', description: 'Pediatrician'),
-    //   Doctor(title: 'Dr. Michael Johnson', description: 'Orthopedic Surgeon'),
-    //   Doctor(title: 'Dr. John Doe', description: 'Cardiologist'),
-    //   Doctor(title: 'Dr. Jane Smith', description: 'Pediatrician'),
-    //   Doctor(title: 'Dr. Michael Johnson', description: 'Orthopedic Surgeon'),
-    //   Doctor(title: 'Dr. John Doe', description: 'Cardiologist'),
-    //   Doctor(title: 'Dr. Jane Smith', description: 'Pediatrician'),
-    //   Doctor(title: 'Dr. Michael Johnson', description: 'Orthopedic Surgeon')
-    // ];
+    apiServices = Provider.of<ApiServices>(context);
 
-    if (futureDoctors == null) {
-      return Center(child: CircularProgressIndicator());
-    } else if (futureDoctors.isEmpty) {
-      return Center(child: Text('No  doctors available'));
-    }
+    // if (futureDoctors == null) {
+    //   return Center(child: CircularProgressIndicator());
+    // } else if (futureDoctors.isEmpty) {
+    //   return Center(child: Text('No  doctors available'));
+    // }
     return Scaffold(
-      appBar: AppBar(title: Text('Doctors List')),
+      appBar: AppBar(title: const Text('Doctors List')),
       // body: ListView.builder(
       //   itemCount: 2,
       //   itemBuilder: (context, index) {
@@ -52,20 +51,32 @@ class _VerticalCardListState extends State<VerticalCardList> {
       //     );
       //   },
       // ),
-      body: ListView(
-          children: List.generate(futureDoctors.length, (index) {
-        return ListTile(
-          // title: Text(doctors[index].title),
-          // subtitle: Text(doctors[index].description),
-          title: Column(
-            children: <Widget>[
-              CustomCard(
-                  title: futureDoctors[index].title,
-                  description: futureDoctors[index].description)
-            ],
-          ),
-        );
-      })),
+      body: apiServices.doctors.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    height: 500,
+                    child: ListView(
+                        children:
+                            List.generate(apiServices.doctors.length, (index) {
+                      return ListTile(
+                        title: Column(
+                          children: <Widget>[
+                            CustomCard(
+                                title: apiServices.doctors[index].title,
+                                description:
+                                    apiServices.doctors[index].description)
+                          ],
+                        ),
+                      );
+                    })),
+                  ),
+                  // Container(width: 200, height: 200, color: Colors.red)
+                ],
+              ),
+            ),
     );
   }
 }

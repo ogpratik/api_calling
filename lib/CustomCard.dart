@@ -30,12 +30,12 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      elevation: 20,
-      margin: EdgeInsets.all(10),
+      elevation: 50,
+      margin: EdgeInsets.all(5),
       child: Container(
-        width: 600,
+        width: 500,
         height: 150,
         // color: Colors.grey,
         child: Padding(
@@ -64,9 +64,6 @@ class CustomCard extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                          // decoration: BoxDecoration(
-                          //   borderRadius: BorderRadius.all(Radius.circular(10)),
-                          // ),
                           margin: EdgeInsets.all(5),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
@@ -84,7 +81,6 @@ class CustomCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   title,
@@ -120,11 +116,11 @@ class CustomCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    width: 100,
-                    height: 25,
+                    width: 120,
+                    height: 30,
                     decoration: BoxDecoration(
                       color: Colors.black,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(15),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -135,12 +131,11 @@ class CustomCard extends StatelessWidget {
                           '09:30 - 6:30',
                           style: TextStyle(
                               color: Color.fromARGB(255, 119, 179, 123),
-                              fontSize: 12),
+                              fontSize: 13),
                         ),
                       ],
                     ),
                   ),
-                  // sized  box for properly align Book Button
                   Column(
                     children: [
                       Container(
@@ -148,8 +143,8 @@ class CustomCard extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                            elevation: 12,
-                            shadowColor: Colors.red,
+                            elevation: 40,
+                            shadowColor: Color.fromARGB(255, 255, 86, 74),
                             backgroundColor: Colors.red,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),

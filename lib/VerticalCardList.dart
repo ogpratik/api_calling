@@ -51,6 +51,7 @@ class _VerticalCardListState extends State<VerticalCardList> {
       //     );
       //   },
       // ),
+
       body: apiServices.doctors.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
@@ -65,9 +66,11 @@ class _VerticalCardListState extends State<VerticalCardList> {
                         title: Column(
                           children: <Widget>[
                             CustomCard(
-                                title: apiServices.doctors[index].title,
-                                description:
-                                    apiServices.doctors[index].description)
+                              title: apiServices.doctors[index].title,
+                              description:
+                                  apiServices.doctors[index].description,
+                              image: apiServices.doctors[index].image,
+                            )
                           ],
                         ),
                       );

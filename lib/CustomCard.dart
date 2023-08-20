@@ -4,23 +4,27 @@ import 'package:api_calling/main.dart';
 class Doctor {
   final String title;
   final String description;
-  // final String image;
-  Doctor({
-    required this.title,
-    required this.description,
-    // required this.image
-  });
+  final String image;
+  Doctor({required this.title, required this.description, required this.image});
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
-    return Doctor(title: json['title'], description: json['description']);
+    return Doctor(
+        title: json['title'],
+        description: json['description'],
+        image: json['image']);
   }
 }
 
 class CustomCard extends StatelessWidget {
   final String title;
   final String description;
+  final String image;
 
-  const CustomCard({super.key, required this.title, required this.description});
+  const CustomCard(
+      {super.key,
+      required this.title,
+      required this.description,
+      required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -29,26 +33,29 @@ class CustomCard extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       elevation: 20,
-      margin: const EdgeInsets.all(10),
+      margin: EdgeInsets.all(10),
       child: Container(
         width: 600,
         height: 150,
         // color: Colors.grey,
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: EdgeInsets.all(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 width: 500,
-                height: 60,
-                decoration: const BoxDecoration(
+                height: 75,
+                decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomCenter,
-                        colors: [Colors.green, Colors.white])),
+                        colors: [
+                          Color.fromARGB(255, 119, 179, 123),
+                          Colors.white
+                        ])),
                 // color: Colors.red,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +71,7 @@ class CustomCard extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: Image.network(
-                              'https://img.freepik.com/premium-photo/healthcare-medical-concept-young-male-doctor-with-stethoscope-hospital_380164-53003.jpg',
+                              image,
                               width: 50,
                               height: 200,
                               fit: BoxFit.fill,
@@ -119,14 +126,16 @@ class CustomCard extends StatelessWidget {
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.access_time, color: Colors.white, size: 16),
                         SizedBox(width: 5),
                         Text(
                           '09:30 - 6:30',
-                          style: TextStyle(color: Colors.white, fontSize: 12),
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 119, 179, 123),
+                              fontSize: 12),
                         ),
                       ],
                     ),
@@ -147,9 +156,7 @@ class CustomCard extends StatelessWidget {
                           ),
                           child: const Text(
                             'Book',
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                                fontSize: 14),
+                            style: TextStyle(color: Colors.white, fontSize: 14),
                           ),
                         ),
                       ),
